@@ -44,11 +44,11 @@ router.put('/:id', (req, res) => {
       if (id === member.id) {
         member.name = updMember.name ? updMember.name : member.name;
         member.email = updMember.email ? updMember.email : member.email;
-
-        res.json({
-          message: `Member with the id ${member.id} Updated!`,
-          members,
-        });
+        // res.json({
+        //   message: `Member with the id ${member.id} Updated!`,
+        //   members,
+        // });
+        res.redirect('/');
       }
     });
   } else {
@@ -61,10 +61,11 @@ router.delete('/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const found = members.some((member) => member.id === id);
   if (found) {
-    res.json({
-      members: members.filter((member) => member.id !== id),
-      message: `Member with the id ${id} Deleted!`,
-    });
+    // res.json({
+    //   members: members.filter((member) => member.id !== id),
+    //   message: `Member with the id ${id} Deleted!`,
+    // });
+    res.redirect('/');
   } else {
     res.status(400).send({ error: `No member with the id ${id} found!` });
   }

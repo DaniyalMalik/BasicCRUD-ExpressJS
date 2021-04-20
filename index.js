@@ -4,6 +4,7 @@ const app = express();
 const members = require('./Members');
 const logger = require('./middleware/Logger');
 const exphbs = require('express-handlebars');
+const methodOverride = require('method-override');
 // app.use(logger);
 
 app.get('/', (req, res) =>
@@ -11,9 +12,9 @@ app.get('/', (req, res) =>
 );
 
 // app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');

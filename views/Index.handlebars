@@ -1,97 +1,103 @@
-<h1 class="text-center mt-4">{{title}}</h1>
-<h3 class="mt-4 mb-4">Members:</h3>
-<ul class="list-group">
-    {{#each members}}
-    <li class="list-group-item">
-        <b>Name:</b> {{this.name}} <br> <b>Email:</b> {{this.email}}<br> <b>Status:</b> {{this.status}}
-        <div class="btn-group" style="justifyContent: flex-end">
-            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#add">Add</button>
-            <button type='button' class="btn btn-secondary" data-toggle="modal" data-target="#update">Update</button>
+    <h1 class="text-center mt-4">{{title}}</h1>
+    <h3 class="mt-4 mb-4">Members:</h3>
+    <ul class="list-group">
+        {{#each members}}
+        <li class="list-group-item">
+            <b>Id: </b>{{this.id}} <br><b>Name:</b> {{this.name}} <br> <b>Email:</b> {{this.email}}<br> <b>Status:</b>
+            {{this.status}}
+            <button type='button' class="btn btn-success" data-toggle="modal" data-target="#add">Add</button>
+            <button type='button' class="btn btn-primary" data-toggle="modal" data-target="#update">Update</button>
             <button type='button' class="btn btn-danger" data-toggle="modal" data-target="#delete">Delete</button>
-        </div>
-    </li>
-    {{/each}}
-</ul>
-
-{{!-- Add a member --}}
-<div class="modal" id="add">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add a Member</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </li>
+        {{/each}}
+    </ul>
+    {{!-- Add a member --}}
+    <div class="modal" id="add">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add a Member</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/api/members" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name"><b>Name:</b></label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><b>Email:</b></label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Add Member" class="btn btn-success btn-block">
+                    </div>
+                </form>
             </div>
-            <form action="/api/members" method="POST">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name"><b>Name:</b></label>
-                        <input type="text" class="form-control" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><b>Email:</b></label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Add Member" class="btn btn-success btn-block">
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
-{{!-- Delete a member --}}
-<div class="modal" id="delete">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Delete a Member</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+    {{!-- Delete a member --}}
+    <div class="modal" id="delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete a Member</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/api/members/1?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div class="modal-body">
+                        {{!-- <div class="form-group">
+                            <label for="id"><b>Id:</b></label>
+                            <input type="text" class="form-control" name="id" required>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="name"><b>Name:</b></label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><b>Email:</b></label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Delete Member" class="btn btn-danger btn-block">
+                    </div>
+                </form>
             </div>
-            <form action="/api/members/1?_method=DELETE" method="POST">
-                <input type="hidden" name="_method" value="DELETE">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name"><b>Name:</b></label>
-                        <input type="text" class="form-control" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><b>Email:</b></label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Delete Member" class="btn btn-success btn-block">
-                </div>
-            </form>
         </div>
     </div>
-</div>
 
-{{!-- Update a member --}}
-<div class="modal" id="update">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Update a Member</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+    {{!-- Update a member --}}
+    <div class="modal" id="update">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update a Member</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/api/members/1?_method=PUT" method="POST">
+                    <input type="hidden" name="_method" value="PUT" required>
+                    <div class="modal-body">
+                        {{!-- <div class="form-group">
+                            <label for="id"><b>Id:</b></label>
+                            <input type="text" class="form-control" name="id" required>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="name"><b>Name:</b></label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><b>Email:</b></label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Update Member" class="btn btn-primary btn-block">
+                    </div>
+                </form>
             </div>
-            <form action="/api/members/1?_method=PUT" method="POST">
-                <input type="hidden" name="_method" value="PUT" required>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name"><b>Name:</b></label>
-                        <input type="text" class="form-control" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><b>Email:</b></label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" value="Update Member" class="btn btn-success btn-block">
-                </div>
-            </form>
         </div>
     </div>
-</div>
